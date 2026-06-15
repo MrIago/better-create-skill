@@ -68,11 +68,37 @@ under-trigger skills; spell out trigger phrases.
 Validate the frontmatter, then trigger the skill with realistic prompts (and a
 baseline without it). Process and iteration tips: `references/testing.md`.
 
-### 6. Publish as an installable plugin
-The official skill-creator stops before this. To let anyone
-`/plugin marketplace add you/repo` → `/plugin install`, you need the
-`.claude-plugin/` files, repo layout, and the install/reload cycle:
-`references/publishing.md`.
+### 6. Ship it — personal plain skill (DEFAULT) or plugin (for sharing)
+
+**Default for your own skills: a plain skill, version-controlled, NOT a plugin.**
+A skill is just a folder with `SKILL.md` (+ optional `scripts/`, `references/`).
+No `.claude-plugin/`, no marketplace, no namespacing (`/name`, not `/plugin:name`).
+The workflow keeps a git repo as the source of truth and a clone where Claude
+loads it:
+
+```bash
+# 1. The skill lives as its own git repo in your dev home:
+#    ~/Documentos/Projetos/Pessoal/skills/<name>/   (SKILL.md at the root)
+cd ~/Documentos/Projetos/Pessoal/skills/<name>
+git init && git add -A && git commit -m "<name> skill"
+# 2. Create the GitHub repo + push (so it's backed up + cloneable anywhere):
+#    gh repo create MrIago/<name> --public --source=. --push   (or the API)
+# 3. Clone it where Claude Code discovers personal skills:
+git clone https://github.com/MrIago/<name>.git ~/.claude/skills/<name>
+```
+
+**Updating later:** edit in `Pessoal/skills/<name>` → commit → push → then
+`git -C ~/.claude/skills/<name> pull`. The dev repo is where you work; the
+`~/.claude/skills/` clone is what runs. (Even simpler if your OS/setup allows:
+symlink `~/.claude/skills/<name>` → the Pessoal repo, and you skip the pull —
+but the clone+pull model above is the safe, portable default.)
+
+Why plain skill over plugin: no namespace prefix, no `.claude-plugin/` manifest,
+no marketplace plumbing, instant `/name` invocation, and `~/.claude/skills/`
+live-reloads `SKILL.md` edits within the session. Reach for a **plugin** only
+when you need to *distribute* to other people/teams, or bundle agents/hooks/MCP
+servers — then see `references/publishing.md` for plugin.json, marketplace.json,
+and the install cycle.
 
 ## Reference files
 
