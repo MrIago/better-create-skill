@@ -1,6 +1,6 @@
 ---
 name: better-create-skill
-description: Create production-grade Claude Code skills end to end — from intent to a published, installable plugin. Use this whenever the user wants to build, create, scaffold, design, or publish a skill, slash command, or Claude Code plugin, even if they just describe a repeatable workflow they keep re-explaining ("turn this into a skill", "make a /command for X", "package this as a plugin"). Covers the full lifecycle the official skill-creator skips — the actual mechanism (SKILL.md body, the skill-dir variable, context lifecycle), bundling scripts, multi-OS portability, secret and key config, and publishing to a GitHub plugin marketplace.
+description: Create production-grade Claude Code skills end to end — from intent to a version-controlled, installable skill. Default output is a plain skill (a git repo cloned into ~/.claude/skills), not a plugin. Use this whenever the user wants to build, create, scaffold, design, update, or ship a skill, slash command, or Claude Code plugin, even if they just describe a repeatable workflow they keep re-explaining ("turn this into a skill", "make a /command for X", "package this"). Covers the full lifecycle the official skill-creator skips — the actual mechanism (SKILL.md body, the skill-dir variable, context lifecycle), bundling scripts, multi-OS portability, secret and key config, the plain-skill git workflow (repo → push → clone/pull), and plugins/marketplaces when distributing to others.
 allowed-tools: Bash, Read, Write, Edit, WebFetch
 ---
 
@@ -9,8 +9,9 @@ allowed-tools: Bash, Read, Write, Edit, WebFetch
 You already know how to write prose. This skill makes you good at the *craft* of
 Claude Code skills: the parts that aren't obvious until you've shipped one — how
 the mechanism actually works, when to bundle a script, how to make it run on
-someone else's machine, how to handle their API keys, and how to publish it so
-anyone can `/plugin install` it.
+someone else's machine, how to handle their API keys, and how to ship it as a
+version-controlled plain skill (git repo → clone in `~/.claude/skills`) — or a
+plugin when you need to distribute it to others.
 
 It is **knowledge, not automation** — every skill is different, so there's no
 generic generator. Instead each reference file carries copy-paste snippets and
